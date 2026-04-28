@@ -16,6 +16,7 @@ def prepare_audio(song_name, artist):
         'format': 'bestaudio/best',
         'default_search': 'ytsearch1:',
         'outtmpl': 'temp_audio.%(ext)s',
+        'cookiefile': 'cookies.txt',  # <--- 加入這一行，檔名要跟上傳的一樣
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
