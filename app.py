@@ -13,16 +13,20 @@ st.set_page_config(page_title="大滷麵猜歌大賽", page_icon="🎵", layout=
 def prepare_audio(song_name, artist):
     query = f"{song_name} {artist}"
     ydl_opts = {
-        'format': 'bestaudio/best',
-        'default_search': 'ytsearch1:',
-        'outtmpl': 'temp_audio.%(ext)s',
-        'cookiefile': 'cookies.txt',  # <--- 加入這一行，檔名要跟上傳的一樣
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-        }],
-        'quiet': True,
-    }
+    'format': 'bestaudio/best',
+    'default_search': 'ytsearch1:',
+    'outtmpl': 'temp_audio.%(ext)s',
+    'cookiefile': 'cookies.txt',
+    'nocheckcertificate': True,  # 跳過 SSL 檢查
+    'ignoreerrors': True,
+    'no_warnings': True,
+    'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+    }],
+    'quiet': True,
+}
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([query])
 
